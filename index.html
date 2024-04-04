@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH255 Security</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional CSS styles for enhanced professionalism */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        section {
+            padding: 50px 0;
+            text-align: center;
+        }
+        h2, p {
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        .team-member h3 {
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 150px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #ffd700;
+            color: #333;
+        }
+        .highlight {
+            color: #ffd700;
+        }
+        /* Box styling for services */
+        .services-box {
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><span class="highlight">SH255</span> Security</h1>
+            <nav>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <!-- Wrap the list of services in a div with class "services-box" -->
+            <div class="services-box">
+                <p>We provide top-notch security services to protect your business and personal information.</p>
+                <ul>
+                    <li>Cybersecurity</li>
+                    <li>Physical Security</li>
+                    <li>Identity Protection</li>
+                    <li>Data Encryption</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="team">
+        <div class="container">
+            <h2>Our Team</h2>
+            <div class="team-member">
+                <h3>CEO+FOUNDER - SH255</h3>
+                <p></p>
+            </div>
+            <div class="team-member">
+                <h3>CEO-Yua</h3>
+                <p></p>
+            </div>
+            <div class="team-member">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contactForm" onsubmit="return validateForm()">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SH255 Security. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function sendMessage() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value;
+
+            // Construct the payload
+            var payload = {
+                content: 'New contact form submission:\nName: ' + name + '\nEmail: ' + email + '\nSubject: ' + subject + '\nMessage: ' + message
+            };
+
+            // Send POST request to the webhook URL
+            fetch('https://discord.com/api/webhooks/1225443154929385564/UfgVHEZmKjdBSiPWnMGTCXo9HU7SFh4Zz-43GUxzNoHQcYxwdrzdMUjmW7JUhc86_3a7', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to send message to Discord');
+                }
+                alert('Your message has been sent successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while sending your message. Please try again later.');
+            });
+        }
+
+        function validateForm() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value;
+
+            if (name.trim() === '' || email.trim() === '' || subject.trim() === '' || message.trim() === '') {
+                alert('All fields are required!');
+                return false;
+            }
+
+            // Simple email validation
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address!');
+                return false;
+            }
+
+            // Additional validation if needed
+
+            // If all validations pass, submit the form
+            sendMessage();
+            return true;
+        }
+    </script>
+</body>
+</html>
